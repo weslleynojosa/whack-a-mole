@@ -19,3 +19,29 @@ export const Area = styled.div`
     gap: 15px;
     grid-auto-rows: 1fr;
 `
+
+export const Panel = styled.div`
+    display: flex;
+    width: 80%;
+    height: 50px;
+    justify-content: space-between;
+`
+
+export const Score = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+`
+
+export const Title = styled.span``
+
+export const StopWatch = styled.span`
+    font-size: 1.5em;
+`
+
+
+export const Points = styled.span`
+    color: red;
+    font-size: 1.3em;
+`
