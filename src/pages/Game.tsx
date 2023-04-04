@@ -1,13 +1,22 @@
-import Mole from "@/components/Mole"
-import Timer from "@/components/Timer"
+import { useEffect, useState } from "react"
+import { useRouter } from "next/router"
+import { useAppDispatch, useAppSelector } from "@/store/hooks"
+import { rankActions } from "@/store/rank-slice"
 import { Area, Main, Panel, Points, Score, Title } from "@/components/styles/Game.styled"
 import { Result, HighScore, Hint, MaxScore, Name, Next } from "@/components/styles/Result.styled"
-import { useEffect, useState } from "react"
+import Mole from "@/components/Mole"
+import Timer from "@/components/Timer"
 
 const Game = () => {
     const [randMole, setRandMole] = useState<number>(0)
     const [score, setScore] = useState<number>(0)
     const [stop, setStop] = useState<boolean>(false)
+    const [highScore, setHighScore] = useState<boolean>(false)
+    const [name, setName] = useState<string>('')
+    const { players } = useAppSelector((state) => state.rank)
+
+    const dispatch = useAppDispatch()
+    const router = useRouter()
 
     useEffect(() => {
         if (!stop) {
@@ -20,7 +29,9 @@ const Game = () => {
     }, [stop])
 
     const handleScore =  () => {
-        setScore(score + 10)
+        if (!stop) {
+            setScore(score + 10)
+        }
     }
 
     const randGen = () => {
@@ -31,7 +42,32 @@ const Game = () => {
     const stopGame = () => {
         setTimeout(() => {
             setStop(true)
+            handleHighScore()
         }, 1000)
+    }
+
+    const handleHighScore = () => {
+        if (players.length === 0) {
+            setHighScore(true)
+        } else {
+            const isHigher = players.find((player) => player.score < score)
+            if (isHigher) {
+                setHighScore(true)
+            } else {
+                setTimeout(() => {
+                    router.push('/Home')
+                })
+            }
+        }
+    }
+
+    const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setName(e.target.value)
+    }
+
+    const leaderBoard = () => {
+        dispatch(rankActions.add({name: name, score: score}))
+        router.push('/Leaderboard')
     }
 
     return (
@@ -52,13 +88,13 @@ const Game = () => {
                     })
                 }
             </Area>
-            {stop ? 
+            {stop && highScore ? 
                 <Result>
                     <HighScore>NEW HIGH SCORE!</HighScore>
                     <MaxScore>{score}</MaxScore>
-                    <Name type="text" maxLength={3}/>
+                    <Name required value={name} type="text" maxLength={3} onChange={handleName}/>
                     <Hint>Put your initials</Hint>
-                    <Next>NEXT</Next>
+                    <Next onClick={leaderBoard}>NEXT</Next>
                 </Result> 
             : ''}
         </Main>

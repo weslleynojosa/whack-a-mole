@@ -1,13 +1,10 @@
 import styled from "styled-components";
+import { Div, Header } from "./Global.styled";
 
-export const Main = styled.div`
-    width: 100vw;
-    height: 100vh;
-    display: flex;
+export const Main = styled(Div)`
     position: relative;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 `
 
 export const Area = styled.div`
@@ -19,15 +16,16 @@ export const Area = styled.div`
     grid-auto-rows: 1fr;
 `
 
-export const Panel = styled.div`
+export const Panel = styled(Header)`
     display: flex;
     width: 80%;
-    height: 50px;
+    height: 100px;
+    margin: 20px auto 50px;
     justify-content: space-between;
+    align-items: center;
 `
 
-export const Score = styled.div`
-    display: flex;
+export const Score = styled(Div)`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -36,11 +34,12 @@ export const Score = styled.div`
 export const Title = styled.span`
     color: #000;
     font-size: 1em;
-
+    margin-bottom: 10px;
 `
 
 export const StopWatch = styled(Title)`
     font-size: 1.5em;
+    z-index: 1;
 `
 
 export const Points = styled(Title)`

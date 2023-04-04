@@ -14,6 +14,10 @@ const initialState: IRank = {
     players: []
 }
 
+const orderRank = (players: Player[], newPlayer: Player) => {
+    return [...players, newPlayer].sort((a,b) => b.score - a.score).slice(0,10)
+}
+
 const rankSlice = createSlice({
     name: 'rank',
     initialState,
@@ -21,10 +25,14 @@ const rankSlice = createSlice({
         add(state: IRank, action: PayloadAction<Player>) {
             if (state.players.length === 0) {
                 state.players.push(action.payload)
+            } else if (state.players.length < 10) {
+                const order = orderRank(state.players, action.payload)
+                state.players = order
             } else {
-                if (state.players[state.players.length-1].score < action.payload.score) {
-                    const orderRank = [...state.players, action.payload].sort((a,b) => b.score - a.score).slice(0,10)
-                    state.players = orderRank
+                const isHigher = state.players.find((player) => player.score < action.payload.score)
+                if (isHigher) {
+                    const order = orderRank(state.players, action.payload)
+                    state.players = order.slice(0,10)
                 }
             }
         }

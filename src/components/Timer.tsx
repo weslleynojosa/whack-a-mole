@@ -6,7 +6,7 @@ type GameProps = {
 }
 
 const Timer = (props: GameProps) => {
-    const [seconds, setSeconds] = useState<number>(10)
+    const [seconds, setSeconds] = useState<number>(120)
     const [warn, setWarn] = useState<boolean>(false)
 
     useEffect(() => {

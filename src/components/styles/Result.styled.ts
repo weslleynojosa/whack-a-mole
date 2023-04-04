@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { Title } from "./Game.styled";
+import { Button, Div } from "./Global.styled";
 
-export const Result = styled.div`
+export const Result = styled(Div)`
     background: #000000f2;
     position: absolute;
     width: 100%;
-    height: 100%;
-    display: flex;
+    height: 100vh;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -46,14 +46,11 @@ export const Name = styled.input`
     }
 `
 
-export const Next = styled.button`
+export const Next = styled(Button)`
     border: 3px solid #e15252;
     background: #ff0808;
-    color: #FFF;
-    font-family: 'Press Start 2P';
     margin: 2.5em;
     padding: 20px 30px;
     font-size: 2em;
     border-radius: 28px;
-    cursor: pointer;
 `

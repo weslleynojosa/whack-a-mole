@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Img } from "./Global.styled";
 
 export const MoleBtn = styled.button`
     width: 100%;
@@ -12,14 +13,6 @@ export const MoleBtn = styled.button`
     :focus-visible {
         outline: none;
     }
-`
-
-const Img = styled.img`
-    -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
-    user-drag: none;
 `
 
 export const Hammer = styled(Img)`
