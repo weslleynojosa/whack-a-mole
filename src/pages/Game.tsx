@@ -1,6 +1,7 @@
 import Mole from "@/components/Mole"
 import Timer from "@/components/Timer"
 import { Area, Main, Panel, Points, Score, Title } from "@/components/styles/Game.styled"
+import { Result, HighScore, Hint, MaxScore, Name, Next } from "@/components/styles/Result.styled"
 import { useEffect, useState } from "react"
 
 const Game = () => {
@@ -28,7 +29,9 @@ const Game = () => {
     }
 
     const stopGame = () => {
-        setStop(true)
+        setTimeout(() => {
+            setStop(true)
+        }, 1000)
     }
 
     return (
@@ -49,6 +52,15 @@ const Game = () => {
                     })
                 }
             </Area>
+            {stop ? 
+                <Result>
+                    <HighScore>NEW HIGH SCORE!</HighScore>
+                    <MaxScore>{score}</MaxScore>
+                    <Name type="text" maxLength={3}/>
+                    <Hint>Put your initials</Hint>
+                    <Next>NEXT</Next>
+                </Result> 
+            : ''}
         </Main>
     )
 

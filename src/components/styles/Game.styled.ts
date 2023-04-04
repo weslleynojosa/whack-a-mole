@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 export const Main = styled.div`
-    background-image: url('/assets/WAM_bg.jpg');
-    background-size: cover;
     width: 100vw;
     height: 100vh;
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -34,14 +33,19 @@ export const Score = styled.div`
     justify-content: space-between;
 `
 
-export const Title = styled.span``
+export const Title = styled.span`
+    color: #000;
+    font-size: 1em;
 
-export const StopWatch = styled.span`
+`
+
+export const StopWatch = styled(Title)`
     font-size: 1.5em;
 `
 
-
-export const Points = styled.span`
-    color: red;
+export const Points = styled(Title)`
+    color: #ff0000;
     font-size: 1.3em;
 `
+
+
